@@ -1,5 +1,8 @@
 **/.DS_Store
 
+## jenv local ...
+/.java-version
+
 HELP.md
 target/
 pom.xml.tag

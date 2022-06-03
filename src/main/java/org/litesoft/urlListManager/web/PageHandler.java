@@ -83,16 +83,19 @@ public class PageHandler {
         String msg;
         HttpStatus status;
         try {
-            return callable.call();
+            ResponseEntity<String> response = callable.call();
+            log.info( context );
+            return response;
         }
         catch ( FileNotFoundRuntimeException | IllegalArgumentException e ) {
-            msg = "Error: " + e.getMessage();
             status = HttpStatus.BAD_REQUEST;
+            msg = "Error: " + e.getMessage();
+            log.info( context + " -- " + msg );
         }
         catch ( Exception e ) {
             log.error( context, e );
-            msg = "Unexpected error: " + e.getMessage() + "\rfrom: " + context;
             status = HttpStatus.INTERNAL_SERVER_ERROR;
+            msg = "Unexpected error: " + e.getMessage() + "\n  from: " + context;
         }
         return ResponseEntity.status( status ).header( "Content-Type", "text/plain" )
                 .body( msg );
@@ -104,7 +107,7 @@ public class PageHandler {
             Boolean state = repo.move2Bottom( url );
             if ( state == null ) {
                 message = "Error: not found: ";
-            } else if (!state) {
+            } else if ( !state ) {
                 message = "Error: already at the bottom: ";
             }
         }
@@ -128,7 +131,7 @@ public class PageHandler {
     }
 
     private static String add( UrlRepository repo, String url ) {
-        if ((url == null) || url.isBlank()) {
+        if ( (url == null) || url.isBlank() ) {
             return "Error: can't add empty URL";
         }
         String message = "Added: ";
