@@ -9,18 +9,18 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @SuppressWarnings("resource")
 public class UrlListManagerApplication {
-	public static final String VERSION = "0.2";
+	public static final String VERSION = "0.3";
 
 	public static void main(String[] args) {
+		System.out.println(ATTENTION + "URL List Manager vs " + VERSION + ATTENTION);
 		SpringApplication.run(UrlListManagerApplication.class, args);
 	}
 
 	@Bean
 	UrlRepositoryFactory repoFactory() {
-		String userDir = System.getProperty( "user.dir" );
-		System.out.println(ATTENTION + "URL List Manager vs " + VERSION + ATTENTION);
-		return new FileUrlRepositoryFactory( userDir );
+		return new FileUrlRepositoryFactory( USER_DIR );
 	}
 
+	private static final String USER_DIR = System.getProperty( "user.dir" );
 	private static final String ATTENTION = " ******************************************** ";
 }
