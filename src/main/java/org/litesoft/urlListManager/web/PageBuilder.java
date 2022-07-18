@@ -35,6 +35,7 @@ public class PageBuilder {
             "         b,strong{font-weight:bolder}",
             "         code,kbd,samp{font-family:monospace,monospace;font-size:1em}",
             "         small{font-size:80%}",
+            "         .OtherPage{font-size:150%}",
             "         sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}",
             "         sub{bottom:-.25em}",
             "         sup{top:-.5em}",
@@ -55,7 +56,7 @@ public class PageBuilder {
             "         template{display:none}",
             "         [hidden]{display:none}",
             "         html{font-family:sans-serif}",
-            "         body{margin:0}",
+            "         body{margin:10}",
             "         .noscript{padding:2rem}",
             "         .noscript a{color:#3d96f7}",
             "      </style>",
@@ -94,8 +95,8 @@ public class PageBuilder {
                "</form></div><br>" + NL;
     }
 
-    private static final String LINK_LIST = "<a href=\"/" + REPLACE_KEY_FILE_NAME + "/list\">list</a><br><br>" + NL;
-    private static final String LINK_ADD = "<a href=\"/" + REPLACE_KEY_FILE_NAME + "/add\">add</a><br><br>" + NL;
+    private static final String LINK_LIST = "<div class=\"OtherPage\"><a href=\"/" + REPLACE_KEY_FILE_NAME + "/list\">List</a></div><br><br>" + NL;
+    private static final String LINK_ADD = "<div class=\"OtherPage\"><a href=\"/" + REPLACE_KEY_FILE_NAME + "/add\">Add</a></div><br><br>" + NL;
 
     public String generateList( List<String> lines, String fileName, Object changes ) {
         StringBuilder sb = addPageCommon();
